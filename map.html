@@ -6,8 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LOViT Course Map</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -16,20 +15,6 @@
   <style>
     #coursemap {
       height: 600px;
-    }
-    
-    #info {
-      display: block;
-      position: relative;
-      margin: 0px auto;
-      width: 50%;
-      padding: 10px;
-      border: none;
-      border-radius: 3px;
-      font-size: 12px;
-      text-align: center;
-      color: #222;
-      background: #fff;
     }
   </style>
 </head>
@@ -46,17 +31,17 @@
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js"></script>
-  <script src="full.js"></script>
+  <script src="segments.js"></script>
 
   <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoiZGlzZGV2IiwiYSI6ImNpaWtxdG42bTAxZDR0bWtudDFqZmphaGgifQ.DSFX6wI2vzU7mfYRJ1pmwQ';
+      
       var map = new mapboxgl.Map({
           container: 'coursemap',
-          style: 'mapbox://styles/mapbox/satellite-v9',
-          center: [-93.33, 34.55],
+          style: 'mapbox://styles/mapbox/outdoors-v10',
+          center: [-93.335, 34.55],
           zoom: 12
       });
 
@@ -72,7 +57,7 @@
       map.on('load', function () {
           map.addSource("route", {
               "type": "geojson",
-              "data": full
+              "data": segments
           });
 
           map.addControl(new mapboxgl.Navigation());
@@ -86,41 +71,8 @@
                   "line-cap": "round"
               },
               "paint": {
-                  "line-color": "#888",
-                  "line-width": 8
-              }
-          });
-
-          map.addSource("points", {
-            "type": "geojson",
-            "data": {
-              "type": "FeatureCollection",
-              "features": [
-                {
-                  "type": "Feature",
-                  "geometry": {
-                    "type": "Point",
-                    "coordinates": [-93.407488, 34.564174]
-                  },
-                  "properties": {
-                    "title": "HNM",
-                    "icon": "monument"
-                  }
-                }
-              ]
-            }
-          });
-
-          map.addLayer({
-              "id": "points",
-              "type": "symbol",
-              "source": "points",
-              "layout": {
-                  "icon-image": "{icon}-15",
-                  "text-field": "{title}",
-                  "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                  "text-offset": [0, 0.6],
-                  "text-anchor": "top"
+                  "line-color": "#336699",
+                  "line-width": 2
               }
           });
       });
